@@ -48,19 +48,18 @@ public class TestObjectValidator : AbstractValidator<TestObject>
 }
 ```
 * Two objects cannot have same boolean value
-  ```csharp
-  public class Test{
+```csharp
+public class Test
+{
     public bool Value1 {get;set;}
     public bool Value2 {get;set;}
-  }
+}
  public class TestValidator : AbstractValidator<Test>
- {
+{
     public TestValidator()
     {
         RuleFor(x => x.Value1)
             .Must(model, validatedValue) => model.Value1 != model.Value2).WithMessage("Value cannot be same for both properties);
     }
- }
-  ```
-
-
+}
+```
