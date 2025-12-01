@@ -1,6 +1,7 @@
-* Fluent Validator either one of property (A or B) is not null
+* Fluent Validator example either one of property (A or B) is not null
+* Do validation only when one of the object is not null
 ```csharp
-    public class MyObject
+public class MyObject
 {
     public string PropertyA { get; set; }
     public string PropertyB { get; set; }
@@ -46,5 +47,20 @@ public class TestObjectValidator : AbstractValidator<TestObject>
     }
 }
 ```
+* Two objects cannot have same boolean value
+  ```csharp
+  public class Test{
+    public bool Value1 {get;set;}
+    public bool Value2 {get;set;}
+  }
+ public class TestValidator : AbstractValidator<Test>
+ {
+    public TestValidator()
+    {
+        RuleFor(x => x.Value1)
+            .Must(model, validatedValue) => model.Value1 != model.Value2).WithMessage("Value cannot be same for both properties);
+    }
+ }
+  ```
 
 
