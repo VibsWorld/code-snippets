@@ -16,3 +16,9 @@ INSERT INTO tmp SELECT * FROM web_book WHERE id = 3;
 UPDATE tmp SET id = nextval('web_book_id_seq');
 INSERT INTO web_book SELECT * from tmp;
 ```
+**Add or Substract Days**
+```sql
+--ref: https://www.datacamp.com/doc/postgresql/date-arithmetic-(+)
+SELECT '2023-10-15'::date + interval '5 days';
+SELECT CURRENT_DATE + interval '5 days';
+```
