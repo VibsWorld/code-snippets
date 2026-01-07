@@ -76,5 +76,21 @@ var options = new JsonSerializerOptions {
     ReadCommentHandling = JsonCommentHandling.Skip
 };
 ```
-
-
+* Pick Property from JsonPath
+```
+    var createIncidentResponseJsonNode = JsonNode.Parse(createIncidentResponseStream);
+        var incidentId = createIncidentResponseJsonNode["incidentId"].ToString();
+        incidentId.Should().NotBeNullOrEmpty();
+```
+* Pick Array from Json Path
+```
+ var incidentDetailsStream =
+            await incidentDetailsWithCommentForUserTypeAsCustomer.ResponseMessage.Content.ReadAsStreamAsync();
+        var incidentDetailsJsonNode = JsonNode.Parse(incidentDetailsStream);
+        var comments = incidentDetailsJsonNode["comments"];
+        comments.Should().NotBeNull();
+        comments.AsArray().Count.Should().Be(1);
+        ShipmentIncidentCommentView[] shipmentIncidentCommentView =
+            comments.Deserialize<ShipmentIncidentCommentView[]>(optionsJsonSerializer);
+        Assert.True(shipmentIncidentCommentView.All(c => c.IsPublic));
+```
