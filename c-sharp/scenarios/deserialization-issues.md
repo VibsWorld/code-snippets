@@ -1,5 +1,11 @@
 ## Performing Deserialization using JSON Nodes (`System.Text.Json`)
-
+### Main Options
+```
+CamelCase: options.JsonNamingPolicy = JsonNamingPolicy.CamelCase;
+Ignore Nulls: options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+Case Insensitive: options.PropertyNameCaseInsensitive = true;
+Enum as String: options.Converters.Add(new JsonStringEnumConverter());
+```
 ### Working options
 ```csharp
  private static readonly JsonSerializerOptions optionsJsonSerializer =
